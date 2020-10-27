@@ -23,11 +23,13 @@ class CardMeneger {
 var Cards = new CardMeneger($('.result>table'))
 
 let url = 'https://api.jsonbin.io/b/5f981e4430aaa01ce619a115';
-var json
+let json
 fetch(url)
     .then(response => response.json())
-    .then(response => json = e)
-alert(json[0].name)
+    .then(response => json = response)
+console.log(json)
+    // console.log(json[0].name)
+    // alert(json[0].name)
 var old_tbody = document.getElementById('t')
 var new_tbody = document.createElement('tbody')
 for (var i = 0; i < 10; ++i) {
