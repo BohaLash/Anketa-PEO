@@ -23,23 +23,19 @@ class CardMeneger {
 var Cards = new CardMeneger($('.result>table'))
 
 let url = 'https://api.jsonbin.io/b/5f981e4430aaa01ce619a115';
-let response = await fetch(url);
-
-if (response.ok) {
-    let json = await response.json();
-    var old_tbody = getElementById("t");
-    var new_tbody = document.createElement('tbody');
-    for (var i = 0; i < 10; ++i) {
-        var newRow = new_tbody.insertRow();
-        for (var j = 0; j < 5; ++j) {
-            var newCell = newRow.insertCell(0);
-            var newText = document.createTextNode('New top row');
-            newCell.appendChild(newText);
-        }
-
+var json
+fetch(url)
+    .then(response => response.json())
+    .then(response => json = e)
+alert(json[0].name)
+var old_tbody = document.getElementById('t')
+var new_tbody = document.createElement('tbody')
+for (var i = 0; i < 10; ++i) {
+    var newRow = new_tbody.insertRow()
+    for (var j = 0; j < 5; ++j) {
+        var newCell = newRow.insertCell()
+        var newText = document.createTextNode(i.toString() + ' ' + j.toString())
+        newCell.appendChild(newText)
     }
-    old_tbody.parentNode.replaceChild(new_tbody, old_tbody);
-
-} else {
-    alert("Ошибка HTTP: " + response.status);
 }
+old_tbody.parentNode.replaceChild(new_tbody, old_tbody)
