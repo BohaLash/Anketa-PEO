@@ -1,34 +1,49 @@
 // The Best CRM Ever
 
-class CardMeneger {
-    constructor(table) {
-        this.opened = false
-        table.find("tr").click((e) => this.rowClicked(e));
-        $("body").click((e) => this.close());
-        $(".card").click(e => e.stopPropagation())
-    }
-    rowClicked(e) {
-        if (this.opened == false) {
-            $('.card').css("display", "block")
-            this.opened = true;
-            e.stopPropagation()
-        }
-    }
-    close() {
-        $('.card').css("display", "none")
-        this.opened = false;
-    }
-}
+// class CardMeneger {
+//     constructor(table) {
+//         this.opened = false
+//         table.find("tr").click((e) => this.rowClicked(e))
+//         $("body").click((e) => this.close())
+//         $(".card").click(e => e.stopPropagation())
+//     }
+//     rowClicked(e) {
+//         if (this.opened == false) {
+//             $('.card').css("display", "block")
+//             this.opened = true;
+//             e.stopPropagation()
+//         }
+//     }
+//     close() {
+//         $('.card').css("display", "none")
+//         this.opened = false
+//     }
+// }
 
-var Cards = new CardMeneger($('.result>table'))
-
+// var Cards = new CardMeneger($('.result>table'))
 
 let url = 'https://api.jsonbin.io/b/5f981e4430aaa01ce619a115';
 let response = await fetch(url);
 
-if (response.ok) {
-    let json = await response.json();
 
-} else {
-    alert("Ошибка HTTP: " + response.status);
-}
+// let url = 'https://api.jsonbin.io/b/5f981e4430aaa01ce619a115';
+// let response = await fetch(url);
+
+// if (response.ok) {
+//     let json = await response.json();
+//     var old_tbody = getElementById("t");
+//     var new_tbody = document.createElement('tbody');
+//     for (var i = 0; i < 10; ++i) {
+//         var newRow = new_tbody.insertRow();
+//         for (var j = 0; j < 5; ++j) {
+//             var newCell = newRow.insertCell(0);
+//             var newText = document.createTextNode('New top row');
+//             newCell.appendChild(newText);
+//         }
+
+//     }
+//     old_tbody.parentNode.replaceChild(new_tbody, old_tbody);
+
+// } else {
+//     alert("Ошибка HTTP: " + response.status);
+// }
