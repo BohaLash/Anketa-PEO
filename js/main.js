@@ -21,3 +21,14 @@ class CardMeneger {
 }
 
 var Cards = new CardMeneger($('.result>table'))
+
+
+let url = 'https://api.jsonbin.io/b/5f981e4430aaa01ce619a115';
+let response = await fetch(url);
+
+if (response.ok) {
+    let json = await response.json();
+
+} else {
+    alert("Ошибка HTTP: " + response.status);
+}
