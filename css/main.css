@@ -85,10 +85,6 @@ nav button:last-child {
     margin-top: 0;
 }
 
-nav button:last-child {
-    display: none;
-}
-
 button,
 section,
 input[type="text"] {
