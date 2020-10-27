@@ -173,8 +173,7 @@ section {
 .filters div,
 input[type="reset"],
 input[type="text"],
-button,
-.show_all {
+button {
     border-radius: 25px;
 }
 
@@ -240,14 +239,12 @@ form {
     font-weight: bold;
 }
 
-.filters div,
-.show_all {
+.filters div {
     line-height: 50px;
 }
 
 .filters div,
-input[type="reset"],
-.show_all {
+input[type="reset"] {
     margin: 25px;
     width: 200px;
     height: 50px;
@@ -336,10 +333,6 @@ lable {
     font-weight: normal;
 }
 
-.show_all {
-    border: none;
-}
-
 table {
     width: 100%;
     border-collapse: collapse;
@@ -400,7 +393,6 @@ th:last-child {
 @media screen and (max-width: 1150px) {
     .result th:nth-last-child(2),
     .result th:last-child,
-    /* .result td:nth-last-child(3), */
     .result td:nth-last-child(2),
     .result td:last-child {
         display: none;
@@ -416,14 +408,14 @@ th:last-child {
 
 @media screen and (max-width: 690px) {
     .result th:nth-last-child(4),
-    .result td:nth-last-child(5) {
+    .result td:nth-last-child(4) {
         display: none;
     }
 }
 
 @media screen and (max-width: 320px) {
     .result th:nth-last-child(3),
-    .result td:nth-last-child(4) {
+    .result td:nth-last-child(3) {
         display: none;
     }
 }
