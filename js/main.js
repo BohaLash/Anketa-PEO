@@ -71,7 +71,7 @@ function init() {
         .then(response => response.text())
         .then(response => titles = response.split())
         .then(setTitles())
-        // .then(updateTable('https://api.jsonbin.io/b/5f981e4430aaa01ce619a115'))
+        .then(updateTable('https://api.jsonbin.io/b/5f981e4430aaa01ce619a115'))
 }
 
 init()
