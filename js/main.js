@@ -1,5 +1,7 @@
 // The Best CRM Ever
 
+var titles = ['name', 'age', 'city']
+
 class CardMeneger {
     constructor(table) {
         this.opened = false
@@ -20,24 +22,45 @@ class CardMeneger {
     }
 }
 
-var Cards = new CardMeneger($('.result>table'))
-
-let url = 'https://api.jsonbin.io/b/5f981e4430aaa01ce619a115';
-let json
-fetch(url)
-    .then(response => response.json())
-    .then(response => json = response)
-console.log(json)
-    // console.log(json[0].name)
-    // alert(json[0].name)
-var old_tbody = document.getElementById('t')
-var new_tbody = document.createElement('tbody')
-for (var i = 0; i < 10; ++i) {
-    var newRow = new_tbody.insertRow()
-    for (var j = 0; j < 5; ++j) {
+function setTitles() {
+    console.log(titles)
+    var thead = document.createElement('thead')
+    var newRow = thead.insertRow()
+    for (var j = 0; j < titles.length; ++j) {
         var newCell = newRow.insertCell()
-        var newText = document.createTextNode(i.toString() + ' ' + j.toString())
+        var newText = document.createTextNode(titles[j])
         newCell.appendChild(newText)
     }
+    document.getElementsByTagName('table')[0].appendChild(thead)
 }
-old_tbody.parentNode.replaceChild(new_tbody, old_tbody)
+
+function updateTable(url) {
+    fetch(url)
+        .then(response => response.json())
+        .then(response => toTable(response))
+}
+
+function toTable(json) {
+    var old_tbody = document.getElementsByTagName('tbody')[0]
+    var new_tbody = document.createElement('tbody')
+    for (var i = 0; i < json.length; ++i) {
+        var newRow = new_tbody.insertRow()
+        for (var j = 0; j < titles.length; ++j) {
+            var newCell = newRow.insertCell()
+            var newText = document.createTextNode(json[i][titles[j]])
+            newCell.appendChild(newText)
+        }
+    }
+    old_tbody.parentNode.replaceChild(new_tbody, old_tbody)
+}
+
+function init() {
+    var Cards = new CardMeneger($('.result>table'))
+    fetch('https://0.0.0.0:80/')
+        .then(response => response.text())
+        .then(response => titles = response.split())
+        .then(setTitles())
+    updateTable('https://api.jsonbin.io/b/5f981e4430aaa01ce619a115')
+}
+
+init()
