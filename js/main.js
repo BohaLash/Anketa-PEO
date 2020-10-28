@@ -27,9 +27,10 @@ function setTitles() {
     var thead = document.createElement('thead')
     var newRow = thead.insertRow()
     for (var j = 0; j < titles.length; ++j) {
-        var newCell = newRow.insertCell()
+        var newCell = document.createElement('th')
         var newText = document.createTextNode(titles[j])
         newCell.appendChild(newText)
+        newRow.appendChild(newCell)
     }
     document.getElementsByTagName('table')[0].appendChild(thead)
 }
@@ -60,7 +61,7 @@ function init() {
         .then(response => response.text())
         .then(response => titles = response.split())
         .then(setTitles())
-    updateTable('https://api.jsonbin.io/b/5f981e4430aaa01ce619a115')
+        .then(updateTable('https://api.jsonbin.io/b/5f981e4430aaa01ce619a115'))
 }
 
 init()
