@@ -1,18 +1,19 @@
 // The Best CRM Ever
 
 var titles = ['name', 'age', 'city']
+var search = ''
 
 class CardMeneger {
     constructor(table) {
         this.opened = false
-        table.find("tr").click((e) => this.rowClicked(e))
-        $("body").click((e) => this.close())
-        $(".card").click(e => e.stopPropagation())
+        table.find('tr').click((e) => this.rowClicked(e))
+        $('body').click((e) => this.close())
+        $('.card').click(e => e.stopPropagation())
     }
     rowClicked(e) {
         if (this.opened == false) {
             $('.card').css("display", "block")
-            this.opened = true;
+            this.opened = true
             e.stopPropagation()
         }
     }
@@ -57,11 +58,20 @@ function toTable(json) {
 
 function init() {
     var Cards = new CardMeneger($('.result>table'))
+    document.getElementById('search')
+        .addEventListener("keyup", function(event) {
+            event.preventDefault()
+            if (event.keyCode === 13) {
+                search = document.getElementById('search').value;
+                updateTable('https://api.jsonbin.io/b/5f981e4430aaa01ce619a115')
+                alert(search)
+            }
+        });
     fetch('https://0.0.0.0:80/')
         .then(response => response.text())
         .then(response => titles = response.split())
         .then(setTitles())
-        .then(updateTable('https://api.jsonbin.io/b/5f981e4430aaa01ce619a115'))
+        // .then(updateTable('https://api.jsonbin.io/b/5f981e4430aaa01ce619a115'))
 }
 
 init()
