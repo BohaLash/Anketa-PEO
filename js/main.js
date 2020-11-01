@@ -5,26 +5,7 @@ var search = ''
 var filters = ['']
 var url = 'http://vdnk.space/index.php/'
 var surl = '?search='
-
-class CardMeneger {
-    constructor(table) {
-        this.opened = false
-        table.find('tr').click((e) => this.rowClicked(e))
-        $('body').click((e) => this.close())
-        $('.card').click(e => e.stopPropagation())
-    }
-    rowClicked(e) {
-        if (this.opened == false) {
-            $('.card').css("display", "block")
-            this.opened = true
-            e.stopPropagation()
-        }
-    }
-    close() {
-        $('.card').css("display", "none")
-        this.opened = false
-    }
-}
+var durl = '?download='
 
 function setTitles(titles) {
     // console.log(titles)
@@ -44,6 +25,7 @@ function updateTable() {
     fetch(url + surl + search + filters.join())
         .then(response => response.json())
         .then(response => toTable(response))
+        .then(response => init_table_handlers())
 }
 
 function toTable(resp) {
@@ -93,7 +75,7 @@ function newFilter(el) {
     var f = document.getElementsByClassName('filter')
     if (f[f.length - 1].value.length > 0) {
         var new_el = document.createElement("div")
-        new_el.innerHTML = '<input type="text" class="filter" onfocusout="hendle_filter(this)">'
+        new_el.innerHTML = '<input type="text" class="filter" onfocusout="handle_filter(this)">'
         el.parentNode.insertBefore(new_el, el)
         filters.push('')
     }
@@ -105,15 +87,51 @@ function resetFilter(el) {
         f[0].parentNode.removeChild(f[0])
     }
     var new_el = document.createElement("div")
-    new_el.innerHTML = '<input type="text" class="filter" onfocusout="hendle_filter(this)">'
+    new_el.innerHTML = '<input type="text" class="filter" onfocusout="handle_filter(this)">'
     var parent = el.parentNode
     parent.insertBefore(new_el, parent.firstChild)
     filters = ['']
     alert(filters)
 }
 
+function init_filters_handlers() {
+    Array.from(document.getElementsByClassName('filter')).forEach(function(element) {
+        element.addEventListener("keyup", function(event) {
+            event.preventDefault()
+            if (event.keyCode === 13) {
+                this.blur()
+            }
+        })
+    })
+}
+
+function init_table_handlers() {
+    var table = document.getElementById("main_t");
+    var rows = table.getElementsByTagName("tr");
+    for (var i = 1; i < rows.length; ++i) {
+        rows[i].addEventListener("click", function() {
+            var win = window.open(url + durl + this.getElementsByTagName("td")[0].innerHTML, '_blank');
+            win.focus();
+        })
+    }
+}
+
 function init() {
-    var Cards = new CardMeneger($('.result>table'))
+    // var table = document.getElementById("main_t");
+    // var rows = table.getElementsByTagName("tr");
+    // for (i = 0; i < rows.length; i++) {
+    //     var currentRow = table.rows[i];
+    //     var createClickHandler =
+    //         function(row) {
+    //             return function() {
+    //                 var cell = row.getElementsByTagName("td")[0];
+    //                 var id = cell.innerHTML;
+    //                 alert("id:" + id);
+    //             };
+    //         };
+
+    //     currentRow.onclick = createClickHandler(currentRow);
+    // }
 
     document.getElementById('search')
         .addEventListener("keyup", function(event) {
@@ -123,14 +141,8 @@ function init() {
             }
         });
 
-    Array.from(document.getElementsByClassName('filter')).forEach(function(element) {
-        element.addEventListener("keyup", function(event) {
-            event.preventDefault()
-            if (event.keyCode === 13) {
-                this.blur()
-            }
-        });
-    });
+    init_filters_handlers()
+
     updateTable()
 }
 
