@@ -60,6 +60,9 @@ function toTable(json) {
 
 function init() {
     var Cards = new CardMeneger($('.result>table'))
+        // document.getElementById('search').oninput = function() {
+        //     alert(this.value)
+        // };
     document.getElementById('search')
         .addEventListener("keyup", function(event) {
             event.preventDefault()
