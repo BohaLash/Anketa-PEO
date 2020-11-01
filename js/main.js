@@ -2,7 +2,7 @@
 
 // var titles = []
 var search = ''
-var filters = []
+var filters = ['']
 
 class CardMeneger {
     constructor(table) {
@@ -61,14 +61,14 @@ function toTable(json) {
 
 function hendle_search(el) {
     search = el.value;
-    if (el.value.slice(-2) != "; ") el.value += '; '
+    if (el.value.slice(-2) != "; " && el.value.length > 0) el.value += '; '
     updateTable('https://api.jsonbin.io/b/5f981e4430aaa01ce619a115')
     alert(search)
 }
 
 function hendle_filter(el) {
     if (el.value.length > 0) {
-        filters.push(el.value)
+        filters[Array.prototype.indexOf.call(document.getElementsByClassName('filter'), el)] = el.value
         updateTable('https://api.jsonbin.io/b/5f981e4430aaa01ce619a115')
         alert(filters)
     }
@@ -78,21 +78,24 @@ function hendle_filter(el) {
 function newFilter(el) {
     var f = document.getElementsByClassName('filter')
     if (f[f.length - 1].value.length > 0) {
-        var new_el = document.createElement("div");
+        var new_el = document.createElement("div")
         new_el.innerHTML = '<input type="text" class="filter" onfocusout="hendle_filter(this)">'
         el.parentNode.insertBefore(new_el, el)
+        filters.push('')
     }
 }
 
 function resetFilter(el) {
-    var f = document.getElementsByClassName('filter');
+    var f = document.getElementsByClassName('filter')
     while (f[0]) {
-        f[0].parentNode.removeChild(f[0]);
+        f[0].parentNode.removeChild(f[0])
     }
-    var new_el = document.createElement("div");
+    var new_el = document.createElement("div")
     new_el.innerHTML = '<input type="text" class="filter" onfocusout="hendle_filter(this)">'
     var parent = el.parentNode
     parent.insertBefore(new_el, parent.firstChild)
+    filters = ['']
+    alert(filters)
 }
 
 function init() {
@@ -102,7 +105,7 @@ function init() {
         .addEventListener("keyup", function(event) {
             event.preventDefault()
             if (event.keyCode === 13) {
-                hendle_search(this)
+                this.blur()
             }
         });
 
@@ -110,7 +113,7 @@ function init() {
         element.addEventListener("keyup", function(event) {
             event.preventDefault()
             if (event.keyCode === 13) {
-                hendle_filter(this)
+                this.blur()
             }
         });
     });
