@@ -74,8 +74,8 @@ function toTable(resp) {
 }
 
 function handle_search(el) {
+    if (el.value.slice(-2) != ", " && el.value.length > 0) el.value += ', '
     search = encodeURI(el.value)
-    if (el.value.slice(-2) != "; " && el.value.length > 0) el.value += '; '
     updateTable()
     alert(search)
 }
