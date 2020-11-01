@@ -50,73 +50,8 @@
 
     <section class="filters">
         <form>
-            <div class="meneger">Менеджер
-                <ul>
-                    <li>
-                        <label><input type="checkbox" onclick="onClickHandler()" id="box">Петро</label>
-                    </li>
-                    <li>
-                        <label><input type="checkbox">Марина</label>
-                    </li>
-                </ul>
-            </div>
-            <div class="courses">Курси
-                <ul>
-                    <li>
-                        <label><input type="checkbox">Столяр</label>
-                    </li>
-                    <li>
-                        <label><input type="checkbox">Маляр</label>
-                    </li>
-                </ul>
-            </div>
-            <div class="status">Статус
-                <ul>
-                    <li>
-                        <label><input type="checkbox">Навчається</label>
-                    </li>
-                    <li>
-                        <label><input type="checkbox">Закінчів Курс</label>
-                    </li>
-                </ul>
-            </div>
-            <div class="com">Компанія
-                <ul>
-                    <li>
-                        <label><input type="checkbox">Тесла</label>
-                    </li>
-                    <li>
-                        <label><input type="checkbox">Оріфлейм</label>
-                    </li>
-                </ul>
-            </div>
-            <div class="mail">Пошта
-                <ul>
-                    <li>
-                        <label><input type="checkbox">Google</label>
-                    </li>
-                    <li>
-                        <label><input type="checkbox">Ukr</label>
-                    </li>
-                </ul>
-            </div>
-            <div class="tel">Телефон
-                <ul>
-                    <li>
-                        <label><input type="checkbox">Київ Cтарт</label>
-                    </li>
-                    <li>
-                        <label><input type="checkbox">Вода фон</label>
-                    </li>
-                </ul>
-            </div>
-            <div class="date" style="width: 300px; height: auto;">
-                <p>Період Навчання</p>
-                <label for="from">З: </label>
-                <input id="from" type="date">
-                <br>
-                <label for="since">До: </label>
-                <input id="since" type="date">
+            <div>
+                <input type="text" class="filter">
             </div>
             <input type="reset">
         </form>
@@ -125,20 +60,13 @@
 
     <section class="result">
         <table>
-            <!-- <thead>
-                <tr>
-                    <th>ПІБ</th>
-                    <th class="s700">Пошта</th>
-                    <th class="s700">Телефон</th>
-                    <th class="s1000">Народився</th>
-                    <th class="s1000">Курси</th>
-                </tr>
-            </thead> -->
             <tbody>
                 <tr>
                     <td>Loading...</td>
                 </tr>
             </tbody>
+            <!-- <thead>
+            </thead> -->
         </table>
     </section>
 
@@ -260,13 +188,6 @@
         </div>
     </section>
     <script>
-        function onClickHandler() {
-            var chk = document.getElementById("box").value;
-
-            alert(chk)
-
-        }
-
         function toggleTheme() {
             if (document.body.className == 'th1') {
                 document.body.className = 'th2';

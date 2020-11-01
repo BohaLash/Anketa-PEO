@@ -33,7 +33,8 @@ function setTitles(titles) {
         newCell.appendChild(newText)
         newRow.appendChild(newCell)
     }
-    document.getElementsByTagName('table')[0].appendChild(thead)
+    table = document.getElementsByTagName('table')[0]
+    table.insertBefore(thead, table.firstChild)
     return titles
 }
 
@@ -67,11 +68,25 @@ function init() {
         .addEventListener("keyup", function(event) {
             event.preventDefault()
             if (event.keyCode === 13) {
-                search = document.getElementById('search').value;
+                search = this.value;
+                if (this.value.slice(-2) != "; ") this.value += '; '
                 updateTable('https://api.jsonbin.io/b/5f981e4430aaa01ce619a115')
                 alert(search)
             }
         });
+    document.getElementsByClassName('filter')[0].addEventListener("keyup", function(event) {
+        event.preventDefault()
+        if (event.keyCode === 13) {
+            search = this.value;
+            document.getElementById('search').value += 'hi; '
+            updateTable('https://api.jsonbin.io/b/5f981e4430aaa01ce619a115')
+            alert(search)
+        }
+    });
+    // for (var i in f) {
+    //     console.log(f[i])
+    //     f[i]
+    // }
     updateTable('https://api.jsonbin.io/b/5f981e4430aaa01ce619a115')
 }
 
