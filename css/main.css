@@ -87,7 +87,7 @@ nav button:last-child {
 
 button,
 section,
-input[type="text"] {
+.search input {
     box-shadow: 0 0 30px var(--shadow);
     background: var(--blocks);
     transition: 1s;
@@ -199,7 +199,7 @@ input[type="text"] {
     transition: 1s;
 }
 
-input[type="text"]:focus {
+.search input[type="text"]:focus {
     border: solid var(--accent);
 }
 
@@ -501,10 +501,18 @@ th:last-child {
 
 /* -------------------------------- */
 
-.filter {
+.filters input[type="text"] {
     display: block;
-    border: dashed;
-    border-color: var(--el);
+    border: dashed var(--el);
     margin: 1em;
-    font-size: xx-large;
+    height: 4em;
+    width: 70%;
+    box-shadow: none;
+    background: var(--blocks);
+}
+
+.filters input[type="text"]:focus,
+.filters input[type="text"]:hover {
+    border: dashed var(--accent);
+    box-shadow: none;
 }
