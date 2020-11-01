@@ -32,7 +32,7 @@
     </header>
 
     <section class="search">
-        <input class="resp" id='search' type="text" placeholder="Введите ключевые слова для поиска" onfocusout="hendle_search(this)">
+        <input class="resp" id='search' type="text" onfocusout="handle_search(this)" placeholder="Введите ключевые слова для поиска">
         <button class="resp" id='filters' title="Відкрити вибір фільтрів пошуку">
             <!-- <p>Фільтри</p> -->
             <svg class="r" viewBox="0 0 512 512">
@@ -50,7 +50,7 @@
 
     <section class="filters">
 
-        <input type="text" class="filter" onfocusout="hendle_filter(this)" placeholder="Введите ключевые слова для поиска">
+        <input type="text" class="filter" onfocusout="handle_filter(this)" placeholder="Введите ключевые слова для поиска">
         <input type="button" value="New" onclick="newFilter(this)">
         <input type="button" value="Reset" onclick="resetFilter(this)">
 

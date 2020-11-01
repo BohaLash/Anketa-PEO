@@ -59,14 +59,14 @@ function toTable(json) {
     old_tbody.parentNode.replaceChild(new_tbody, old_tbody)
 }
 
-function hendle_search(el) {
+function handle_search(el) {
     search = encodeURI(el.value)
     if (el.value.slice(-2) != "; " && el.value.length > 0) el.value += '; '
     updateTable('https://api.jsonbin.io/b/5f981e4430aaa01ce619a115')
     alert(search)
 }
 
-function hendle_filter(el) {
+function handle_filter(el) {
     if (el.value.length > 0) {
         filters[Array.prototype.indexOf.call(document.getElementsByClassName('filter'), el)] = encodeURI(el.value)
         updateTable('https://api.jsonbin.io/b/5f981e4430aaa01ce619a115')
