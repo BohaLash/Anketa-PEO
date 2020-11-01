@@ -318,6 +318,9 @@ label {
 }
 
 table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
     width: 100%;
     border-collapse: collapse;
     min-width: 200px;

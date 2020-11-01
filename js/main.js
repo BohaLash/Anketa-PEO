@@ -3,6 +3,8 @@
 // var titles = []
 var search = ''
 var filters = ['']
+var url = 'http://vdnk.space/index.php/'
+var surl = '?search='
 
 class CardMeneger {
     constructor(table) {
@@ -38,13 +40,25 @@ function setTitles(titles) {
     return titles
 }
 
-function updateTable(url) {
-    fetch(url)
+function updateTable() {
+    fetch(url + surl + search)
         .then(response => response.json())
         .then(response => toTable(response))
 }
 
-function toTable(json) {
+function toTable(resp) {
+    var json = []
+    var titles = []
+    for (var i in resp) {
+        var t = Object.keys(resp[i])
+        var m = {}
+        for (var j in t)
+            for (var k in resp[i][t[j]])
+                Object.assign(m, resp[i][t[j]][k]);
+        json.push(m)
+        titles.push(t)
+    }
+    console.log(json)
     titles = setTitles(Object.keys(json[0]))
     var old_tbody = document.getElementsByTagName('tbody')[0]
     var new_tbody = document.createElement('tbody')
@@ -62,14 +76,14 @@ function toTable(json) {
 function handle_search(el) {
     search = encodeURI(el.value)
     if (el.value.slice(-2) != "; " && el.value.length > 0) el.value += '; '
-    updateTable('https://api.jsonbin.io/b/5f981e4430aaa01ce619a115')
+    updateTable()
     alert(search)
 }
 
 function handle_filter(el) {
     if (el.value.length > 0) {
         filters[Array.prototype.indexOf.call(document.getElementsByClassName('filter'), el)] = encodeURI(el.value)
-        updateTable('https://api.jsonbin.io/b/5f981e4430aaa01ce619a115')
+        updateTable()
         alert(filters)
     }
 
@@ -117,7 +131,7 @@ function init() {
             }
         });
     });
-    updateTable('https://api.jsonbin.io/b/5f981e4430aaa01ce619a115')
+    updateTable()
 }
 
 init()
