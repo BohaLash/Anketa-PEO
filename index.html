@@ -32,7 +32,7 @@
     </header>
 
     <section class="search">
-        <input class="resp" id='search' type="text" placeholder="Введіть ключові слова для пошуку">
+        <input class="resp" id='search' type="text" placeholder="Введіть ключові слова для пошуку" onfocusout="hendle_search(this)">
         <button class="resp" id='filters' title="Відкрити вибір фільтрів пошуку">
             <!-- <p>Фільтри</p> -->
             <svg class="r" viewBox="0 0 512 512">
@@ -49,24 +49,21 @@
     </section>
 
     <section class="filters">
-        <form>
-            <div>
-                <input type="text" class="filter">
-            </div>
-            <input type="reset">
-        </form>
+
+        <input type="text" class="filter" onfocusout="hendle_filter(this)">
+        <input type="button" value="New" onclick="newFilter(this)">
+        <input type="button" value="Reset" onclick="resetFilter(this)">
 
     </section>
 
     <section class="result">
         <table>
+            <thead></thead>
             <tbody>
                 <tr>
                     <td>Loading...</td>
                 </tr>
             </tbody>
-            <!-- <thead>
-            </thead> -->
         </table>
     </section>
 

@@ -171,7 +171,7 @@ section {
 }
 
 .filters div,
-input[type="reset"],
+input[type="button"],
 input[type="text"],
 button {
     border-radius: 25px;
@@ -232,19 +232,7 @@ input[type="text"]:focus {
     }
 }
 
-form {
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    font-weight: bold;
-}
-
-.filters div {
-    line-height: 50px;
-}
-
-.filters div,
-input[type="reset"] {
+input[type="button"] {
     margin: 25px;
     width: 200px;
     height: 50px;
@@ -259,7 +247,7 @@ input[type="reset"] {
     text-align: center
 }
 
-input[type="reset"] {
+input[type="button"] {
     width: 100px;
     border-color: inherit;
     color: inherit;
@@ -281,10 +269,6 @@ br {
     margin: 0;
 }
 
-.filters div:hover {
-    height: 180px;
-}
-
 .date:hover>input[type="date"],
 input[type="date"]:focus,
 input[type="date"]:focus~input[type="date"] {
@@ -299,7 +283,7 @@ input[type="date"]:focus~br,
 }
 
 div:hover,
-input[type="reset"]:hover,
+input[type="button"]:hover,
 .card ul:hover {
     border-color: var(--accent);
 }
@@ -512,4 +496,15 @@ th:last-child {
 .history :hover td:nth-child(2),
 .history :hover th:nth-child(2) {
     display: inline-block;
+}
+
+
+/* -------------------------------- */
+
+.filter {
+    display: block;
+    border: dashed;
+    border-color: var(--el);
+    margin: 1em;
+    font-size: xx-large;
 }
