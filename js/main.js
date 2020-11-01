@@ -41,7 +41,7 @@ function setTitles(titles) {
 }
 
 function updateTable() {
-    fetch(url + surl + search)
+    fetch(url + surl + search + filters.join())
         .then(response => response.json())
         .then(response => toTable(response))
 }
@@ -58,7 +58,7 @@ function toTable(resp) {
         json.push(m)
         titles.push(t)
     }
-    console.log(json)
+    // console.log(json)
     titles = setTitles(Object.keys(json[0]))
     var old_tbody = document.getElementsByTagName('tbody')[0]
     var new_tbody = document.createElement('tbody')
@@ -74,8 +74,8 @@ function toTable(resp) {
 }
 
 function handle_search(el) {
-    if (el.value.slice(-2) != ", " && el.value.length > 0) el.value += ', '
     search = encodeURI(el.value)
+    if (search.slice(-2) != "," && search.length > 0) search += ','
     updateTable()
     alert(search)
 }
