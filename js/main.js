@@ -1,6 +1,6 @@
 // The Best CRM Ever
 
-var titles = ['name', 'age', 'city']
+// var titles = []
 var search = ''
 
 class CardMeneger {
@@ -23,7 +23,7 @@ class CardMeneger {
     }
 }
 
-function setTitles() {
+function setTitles(titles) {
     console.log(titles)
     var thead = document.createElement('thead')
     var newRow = thead.insertRow()
@@ -34,6 +34,7 @@ function setTitles() {
         newRow.appendChild(newCell)
     }
     document.getElementsByTagName('table')[0].appendChild(thead)
+    return titles
 }
 
 function updateTable(url) {
@@ -43,6 +44,7 @@ function updateTable(url) {
 }
 
 function toTable(json) {
+    titles = setTitles(Object.keys(json[0]))
     var old_tbody = document.getElementsByTagName('tbody')[0]
     var new_tbody = document.createElement('tbody')
     for (var i = 0; i < json.length; ++i) {
@@ -67,11 +69,7 @@ function init() {
                 alert(search)
             }
         });
-    fetch('https://0.0.0.0:80/')
-        .then(response => response.text())
-        .then(response => titles = response.split())
-        .then(setTitles())
-        .then(updateTable('https://api.jsonbin.io/b/5f981e4430aaa01ce619a115'))
+    updateTable('https://api.jsonbin.io/b/5f981e4430aaa01ce619a115')
 }
 
 init()
