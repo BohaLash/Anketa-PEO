@@ -22,10 +22,21 @@ function setTitles(titles) {
 }
 
 function updateTable() {
-    fetch(url + surl + search + filters.join())
-        .then(response => response.json())
-        .then(response => toTable(response))
-        .then(response => init_table_handlers())
+    if (search.length > 0 || filters.length > 1) {
+        fetch(url + surl + search)
+            .then(response => response.json())
+            .then(response => toTable(response))
+            .then(response => init_table_handlers())
+            //     fetch(url + surl + search + ',' + filters.join())
+            //         .then(response => response.json())
+            //         .then(response => toTable(response))
+            //         .then(response => init_table_handlers())
+    } else {
+        fetch(url)
+            .then(response => response.json())
+            .then(response => toTable(response))
+            .then(response => init_table_handlers())
+    }
 }
 
 function toTable(resp) {
@@ -40,7 +51,7 @@ function toTable(resp) {
         json.push(m)
         titles.push(t)
     }
-    // console.log(json)
+    console.log(json)
     titles = setTitles(Object.keys(json[0]))
     var old_tbody = document.getElementsByTagName('tbody')[0]
     var new_tbody = document.createElement('tbody')
@@ -57,16 +68,13 @@ function toTable(resp) {
 
 function handle_search(el) {
     search = encodeURI(el.value)
-    if (search.slice(-2) != "," && search.length > 0) search += ','
     updateTable()
-    alert(search)
 }
 
 function handle_filter(el) {
     if (el.value.length > 0) {
         filters[Array.prototype.indexOf.call(document.getElementsByClassName('filter'), el)] = encodeURI(el.value)
         updateTable()
-        alert(filters)
     }
 
 }
@@ -91,7 +99,7 @@ function resetFilter(el) {
     var parent = el.parentNode
     parent.insertBefore(new_el, parent.firstChild)
     filters = ['']
-    alert(filters)
+    updateTable()
 }
 
 function init_filters_handlers() {
@@ -117,21 +125,6 @@ function init_table_handlers() {
 }
 
 function init() {
-    // var table = document.getElementById("main_t");
-    // var rows = table.getElementsByTagName("tr");
-    // for (i = 0; i < rows.length; i++) {
-    //     var currentRow = table.rows[i];
-    //     var createClickHandler =
-    //         function(row) {
-    //             return function() {
-    //                 var cell = row.getElementsByTagName("td")[0];
-    //                 var id = cell.innerHTML;
-    //                 alert("id:" + id);
-    //             };
-    //         };
-
-    //     currentRow.onclick = createClickHandler(currentRow);
-    // }
 
     document.getElementById('search')
         .addEventListener("keyup", function(event) {
