@@ -26,16 +26,13 @@ function updateTable() {
         fetch(url + surl + search)
             .then(response => response.json())
             .then(response => toTable(response))
-            .then(response => init_table_handlers())
             //     fetch(url + surl + search + ',' + filters.join())
             //         .then(response => response.json())
             //         .then(response => toTable(response))
-            //         .then(response => init_table_handlers())
     } else {
         fetch(url)
             .then(response => response.json())
             .then(response => toTable(response))
-            .then(response => init_table_handlers())
     }
 }
 
@@ -49,19 +46,28 @@ function toTable(resp) {
             for (var k in resp[i][t[j]])
                 Object.assign(m, resp[i][t[j]][k]);
         json.push(m)
-        titles.push(t)
     }
-    console.log(json)
+
+    // console.log(json)
     titles = setTitles(Object.keys(json[0]))
+    id = Object.keys(resp)
+    console.log(id)
     var old_tbody = document.getElementsByTagName('tbody')[0]
     var new_tbody = document.createElement('tbody')
+    var newRow
     for (var i = 0; i < json.length; ++i) {
-        var newRow = new_tbody.insertRow()
+        newRow = new_tbody.insertRow()
+        newRow.onclick = function() {
+            // console.log(id, Array.prototype.indexOf.call(document.getElementsByTagName('tr'), this) - 1, id[Array.prototype.indexOf.call(document.getElementsByTagName('tr'), this) - 1])
+            var win = window.open(url + durl + id[Array.prototype.indexOf.call(document.getElementsByTagName('tr'), this) - 1], '_blank');
+            win.focus();
+        }
         for (var j = 0; j < titles.length; ++j) {
             var newCell = newRow.insertCell()
             var newText = document.createTextNode(json[i][titles[j]])
             newCell.appendChild(newText)
         }
+
     }
     old_tbody.parentNode.replaceChild(new_tbody, old_tbody)
 }
@@ -113,16 +119,16 @@ function init_filters_handlers() {
     })
 }
 
-function init_table_handlers() {
-    var table = document.getElementById("main_t");
-    var rows = table.getElementsByTagName("tr");
-    for (var i = 1; i < rows.length; ++i) {
-        rows[i].addEventListener("click", function() {
-            var win = window.open(url + durl + this.getElementsByTagName("td")[0].innerHTML, '_blank');
-            win.focus();
-        })
-    }
-}
+// function init_table_handlers() {
+//     var table = document.getElementById("main_t");
+//     var rows = table.getElementsByTagName("tr");
+//     for (var i = 1; i < rows.length; ++i) {
+//         rows[i].addEventListener("click", function() {
+//             var win = window.open(url + durl + this.getElementsByTagName("td")[0].innerHTML, '_blank');
+//             win.focus();
+//         })
+//     }
+// }
 
 function init() {
 
@@ -134,7 +140,7 @@ function init() {
             }
         });
 
-    init_filters_handlers()
+    // init_filters_handlers()
 
     updateTable()
 }
